@@ -32,19 +32,20 @@ while run:
 
     if key[pygame.K_a] or key[pygame.K_LEFT]:
         player.wantedDirection = "left"
-        #player.started = True
+        player.started = True
 
     elif key[pygame.K_d] or key[pygame.K_RIGHT]:
         player.wantedDirection = "right"
-        #player.started = True
+        player.started = True
 
     elif key[pygame.K_s] or key[pygame.K_DOWN]:
         player.wantedDirection = "down"
-        #player.started = True
+        player.started = True
 
     elif key[pygame.K_w] or key[pygame.K_UP]:
         player.wantedDirection = "up"
-        #player.started = True
+        player.started = True
+        
     player.prevent_reverse_movement()
     player.move()
 

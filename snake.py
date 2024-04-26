@@ -20,13 +20,13 @@ class Snake(pygame.sprite.Sprite):
         self.speed = 1
         self.direction = "up"
         self.wantedDirection = "up"
-        #self.started = True
+        self.started = False
 
     def update(self):
         pass
 
     def move(self):
-        #if self.started:
+        if self.started:
             if self.direction == "up":
                 self.rect.y -= self.speed
             elif self.direction == "down":
@@ -52,7 +52,7 @@ class Snake(pygame.sprite.Sprite):
         self = pygame.Rect((player_pos_x, player_pox_y, player_width, player_height))
 
     def prevent_reverse_movement(self):
-        #if self.started:
+        if self.started:
             if self.wantedDirection == "up" and self.direction == "down":
                 self.direction = "down"
             elif self.wantedDirection == "down" and self.direction == "up":

@@ -10,7 +10,7 @@ class Food(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(0, 780), random.randint(0, 580))
 
-        self.hitbox_size = 10
+        self.hitbox_size = 18
         self.hitbox = pygame.Rect(self.rect.centerx - self.hitbox_size // 2, self.rect.centery - self.hitbox_size // 2, self.hitbox_size, self.hitbox_size)
 
     def update(self):
