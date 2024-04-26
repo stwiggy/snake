@@ -1,36 +1,54 @@
 import pygame
+from food import Food
+from snake import Snake
 
 pygame.init()
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+movement_started = False
 
-player = pygame.Rect((300, 250, 50, 50))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+player = Snake()
+
+foods = pygame.sprite.Group()
+food = Food()
+foods.add(food)
 
 run = True
 
 while run:
     screen.fill((0, 0, 0))
-    pygame.draw.rect(screen, (255, 0, 0), player)
+    pygame.draw.rect(screen, (0, 255, 0), player)
+
+    foods.update()
+    foods.draw(screen)
+
+    if food.hitbox.colliderect(player):
+         food.hide()
+         food = Food()
+         foods.add(food)
 
     key = pygame.key.get_pressed()
 
-    #player.bottomleft = (player_pos_x, player_pox_y)
+    if key[pygame.K_a]:
+        player.direction = "left"
+        player.started = True
 
-    if key[pygame.K_a] == True:
-        player_pos_x -= player_speed
-        player = rotatePlayer("left", -90)
+    elif key[pygame.K_d]:
+        player.direction = "right"
+        player.started = True
 
-    elif key[pygame.K_d] == True:
-        player_pos_x += player_speed
-        player = rotatePlayer("right", 0)
+    elif key[pygame.K_s]:
+        player.direction = "down"
+        player.started = True
 
-    elif key[pygame.K_s] == True:
-        player.move_ip(0, -1)
-    elif key[pygame.K_w] == True:
-        player.move_ip(0, 1)
+    elif key[pygame.K_w]:
+        player.direction = "up"
+        player.started = True
+    
+    player.move()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
