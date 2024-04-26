@@ -7,8 +7,6 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-movement_started = False
-
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 player = Snake()
 
@@ -32,22 +30,22 @@ while run:
 
     key = pygame.key.get_pressed()
 
-    if key[pygame.K_a]:
-        player.direction = "left"
-        player.started = True
+    if key[pygame.K_a] or key[pygame.K_LEFT]:
+        player.wantedDirection = "left"
+        #player.started = True
 
-    elif key[pygame.K_d]:
-        player.direction = "right"
-        player.started = True
+    elif key[pygame.K_d] or key[pygame.K_RIGHT]:
+        player.wantedDirection = "right"
+        #player.started = True
 
-    elif key[pygame.K_s]:
-        player.direction = "down"
-        player.started = True
+    elif key[pygame.K_s] or key[pygame.K_DOWN]:
+        player.wantedDirection = "down"
+        #player.started = True
 
-    elif key[pygame.K_w]:
-        player.direction = "up"
-        player.started = True
-    
+    elif key[pygame.K_w] or key[pygame.K_UP]:
+        player.wantedDirection = "up"
+        #player.started = True
+    player.prevent_reverse_movement()
     player.move()
 
     for event in pygame.event.get():

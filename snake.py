@@ -8,7 +8,6 @@ player_height = 50
 player_speed = 1
 player_pos_x = 25
 player_pox_y = 575
-player_direction = "up"
 player_movement_started = False
 
 class Snake(pygame.sprite.Sprite):
@@ -20,13 +19,14 @@ class Snake(pygame.sprite.Sprite):
         self.rect.bottomleft = (0, PLAYING_SCREEN_HEIGHT)
         self.speed = 1
         self.direction = "up"
-        self.started = False
+        self.wantedDirection = "up"
+        #self.started = True
 
     def update(self):
         pass
 
     def move(self):
-        if self.started:
+        #if self.started:
             if self.direction == "up":
                 self.rect.y -= self.speed
             elif self.direction == "down":
@@ -45,7 +45,21 @@ class Snake(pygame.sprite.Sprite):
             elif self.rect.bottom > PLAYING_SCREEN_HEIGHT:
                 self.rect.bottom = PLAYING_SCREEN_HEIGHT
 
+
     def elongate(self):
         global player_height
         player_height += 10
         self = pygame.Rect((player_pos_x, player_pox_y, player_width, player_height))
+
+    def prevent_reverse_movement(self):
+        #if self.started:
+            if self.wantedDirection == "up" and self.direction == "down":
+                self.direction = "down"
+            elif self.wantedDirection == "down" and self.direction == "up":
+                self.direction = "up"
+            elif self.wantedDirection == "left" and self.direction == "right":
+                self.direction = "right"
+            elif self.wantedDirection == "right" and self.direction == "left":
+                self.direction = "left"
+            else:
+                self.direction = self.wantedDirection
