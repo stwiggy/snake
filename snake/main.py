@@ -17,16 +17,19 @@ foods.add(food)
 run = True
 
 while run:
+    pygame.display.set_caption("Snake Game")
     screen.fill((0, 0, 0))
-    pygame.draw.rect(screen, (0, 255, 0), player)
+    #pygame.draw.rect(screen, (0, 255, 0), player)
+    player.draw(screen)
 
     foods.update()
     foods.draw(screen)
 
     if food.hitbox.colliderect(player):
-         food.hide()
-         food = Food()
-         foods.add(food)
+        food.hide()
+        player.elongate()
+        food = Food()
+        foods.add(food)
 
     key = pygame.key.get_pressed()
 
