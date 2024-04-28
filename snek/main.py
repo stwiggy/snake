@@ -1,6 +1,7 @@
 import pygame
 from food import Food
 from snake import Snake
+from snakesegment import SnakeSegment
 
 pygame.init()
 
@@ -18,10 +19,13 @@ clock = pygame.time.Clock()
 
 run = True
 
+thing = SnakeSegment(100, 100)
+
 while run:
     pygame.display.set_caption("Snake Game")
     screen.fill((0, 0, 0))
-    pygame.draw.rect(screen, (0, 255, 0), player)
+    pygame.draw.rect(screen, player.color, player)
+    pygame.draw.rect(screen, thing.color, thing)
     # #player.draw(screen)
     # for segment in player.segments:
     #     pygame.draw.rect(screen, (0, 255, 0), segment)
@@ -40,7 +44,11 @@ while run:
 
     key = pygame.key.get_pressed()
 
-    if key[pygame.K_a] or key[pygame.K_LEFT]:
+    if key[pygame.K_SPACE]:
+        thing.rotate(90)
+        print(thing.x, thing.y)
+
+    elif key[pygame.K_a] or key[pygame.K_LEFT]:
         player.wantedDirection = "left"
         player.started = True
 

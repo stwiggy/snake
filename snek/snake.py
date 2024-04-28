@@ -17,7 +17,7 @@ class Snake(pygame.sprite.Sprite):
         self.head = SnakeSegment(player_pos_x, player_pox_y)
         self.segments = [self.head]
         self.image = pygame.Surface((50, 50))
-        self.image.fill((0, 255, 0))
+        self.color = (0, 255, 0)
         self.rect = self.image.get_rect()
         self.rect.bottomleft = (375, 300)
         self.speed = 1
