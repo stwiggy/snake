@@ -10,5 +10,6 @@ class SnakeSegment(pygame.sprite.Sprite):
         self.next_segment = None
         self.x = x
         self.y = y
+        self.prev_pos = (x, y)
 
     

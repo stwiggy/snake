@@ -21,8 +21,8 @@ class Snake(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.bottomleft = (375, 300)
         self.speed = 1
-        self.direction = "up"
-        self.wantedDirection = "up"
+        self.direction = "start"
+        self.wantedDirection = "start"
         self.started = False
 
     def update(self):
@@ -48,18 +48,20 @@ class Snake(pygame.sprite.Sprite):
             elif self.rect.bottom > PLAYING_SCREEN_HEIGHT:
                 self.rect.bottom = PLAYING_SCREEN_HEIGHT
 
-            current_segment = self.head
-            while current_segment.next_segment:
-                current_segment.x = current_segment.next_segment
-                current_segment.y = current_segment.next_segment
-                current_segment = current_segment.next_segment
+            # current_segment = self.head
+            # while current_segment.next_segment:
+            #     current_segment = current_segment.next_segment
+            #     current_segment.rect.x, current_segment.rect.y = current_segment.prev_pos
+
+            # self.head.prev_pos = (self.rect.x, self.rect.y)
 
 
     def elongate(self):
-        last_segment = self.segments[-1]
-        new_segment = SnakeSegment(last_segment.rect.x, last_segment.rect.y)
-        last_segment.next_segment = new_segment
-        self.segments.append(new_segment)
+        return
+        # last_segment = self.segments[-1]
+        # new_segment = SnakeSegment(last_segment.rect.x, last_segment.rect.y)
+        # last_segment.next_segment = new_segment
+        # self.segments.append(new_segment)
 
     def prevent_reverse_movement(self):
         #if self.started:
@@ -76,5 +78,5 @@ class Snake(pygame.sprite.Sprite):
 
     def draw(self, screen):
         for segment in self.segments:
-            pygame.draw.rect(screen, (0, 255, 0), segment.rect)
-            #screen.blit(segment.image, segment.rect)
+            #pygame.draw.rect(screen, (0, 255, 0), segment.rect)
+            screen.blit(segment.image, segment.rect)

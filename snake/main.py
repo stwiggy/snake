@@ -14,20 +14,27 @@ foods = pygame.sprite.Group()
 food = Food()
 foods.add(food)
 
+clock = pygame.time.Clock()
+
 run = True
 
 while run:
     pygame.display.set_caption("Snake Game")
     screen.fill((0, 0, 0))
-    #pygame.draw.rect(screen, (0, 255, 0), player)
-    player.draw(screen)
+    pygame.draw.rect(screen, (0, 255, 0), player)
+    # #player.draw(screen)
+    # for segment in player.segments:
+    #     pygame.draw.rect(screen, (0, 255, 0), segment)
+    #     #screen.blit(segment.image, segment.rect)
+    #     #print(len(player.segments))
+
 
     foods.update()
     foods.draw(screen)
 
     if food.hitbox.colliderect(player):
         food.hide()
-        player.elongate()
+        #player.elongate()
         food = Food()
         foods.add(food)
 
@@ -57,5 +64,7 @@ while run:
             run = False
     
     pygame.display.flip()
+
+    clock.tick(100) #change to adjust difficulty and stuff
 
 pygame.quit()
